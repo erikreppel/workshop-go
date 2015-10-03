@@ -10,6 +10,11 @@ type Computer struct {
 
 // TODO: Create a "Describe" method that prints all the properties
 
+func (c *Computer) Describe()  {
+    fmt.Println(c.Brand, c.Model, c.Price)
+    
+}
+
 func main() {
     computer := Computer{
         Brand: "Apple",

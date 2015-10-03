@@ -20,6 +20,7 @@ func (c *Computer) StartTimer(channel chan string, t time.Duration) {
     time.Sleep(t)
     
     // TODO: Push the "Time up!" string to the channel
+    channel <- "time up"
 }
 
 func main() {
@@ -29,12 +30,17 @@ func main() {
         Price: 1000,
     }
     
-    channel := make(chan bool)
+    channel := make(chan string)
     
     t := 3 * time.Second
     go computer.StartTimer(channel, t)
+    fmt.Println("stuff happens here")
     
     // Use "select" to listen to the channel and print the string
+    select {
+        case msg := <-channel:
+            fmt.Println(msg)
+    }
     
     fmt.Println("Exited")
 }
